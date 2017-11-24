@@ -79,7 +79,7 @@ DATABASES = {
         # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
         # 'ENGINE': 'django.db.backends.mysql' instead of the following.
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'daily',
+        'NAME': 'hybrid',
         'USER': db_username,
         'PASSWORD': db_password,
         # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
