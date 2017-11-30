@@ -107,3 +107,6 @@ db.sqlite3
 daily/pip-selfcheck.json
 hybrid/settings_secret.py
 cloud_sql_proxy
+
+# Vim swap files.
+*.swp
