@@ -75,21 +75,21 @@ WSGI_APPLICATION = 'hybrid.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
-        # 'ENGINE': 'django.db.backends.mysql' instead of the following.
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hybrid',
-        'USER': settings_secret.DB_USERNAME,
-        'PASSWORD': settings_secret.DB_PASSWORD,
-        # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
-        # SQL Proxy instances running locally must also be set to tcp:3306.
-        'PORT': '5432',
-    }
-    # 'local': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 'default': {
+    #     # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
+    #     # 'ENGINE': 'django.db.backends.mysql' instead of the following.
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'hybrid',
+    #     'USER': settings_secret.DB_USERNAME,
+    #     'PASSWORD': settings_secret.DB_PASSWORD,
+    #     # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
+    #     # SQL Proxy instances running locally must also be set to tcp:3306.
+    #     'PORT': '5432',
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 # In the flexible environment, you connect to CloudSQL using a unix socket.
 # Locally, you can use the CloudSQL proxy to proxy a localhost connection
