@@ -7,7 +7,7 @@ init: start-sql-proxy
 
 run: check-venv
 	$(PYTHON) manage.py runserver
-	
+
 migrate:
 	$(PYTHON) manage.py makemigrations
 	$(PYTHON) manage.py migrate
@@ -19,4 +19,4 @@ ifndef VIRTUAL_ENV
 endif
 
 start-sql-proxy:
-	./cloud_sql_proxy -instances="$(INSTANCE_CONNECTION_NAME)"=tcp:5432 & 
+	./cloud_sql_proxy -instances="$(INSTANCE_CONNECTION_NAME)"=tcp:5432 &
