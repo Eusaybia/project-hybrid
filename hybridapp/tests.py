@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from hybridapp.models import Bid
+from hybridapp.models import Bid, ProseLint, PyEnchant
 
 # Create your tests here.
 class BidTestCase(TestCase):
@@ -14,12 +14,14 @@ class BidTestCase(TestCase):
         print(score)
         
     def test_suggestions(self):
-        text = "THis is no grammar.Lol"
+        text = "Hello\
+                You don't have much code, that to do some review. \
+                Only I want say, that not need place business-logic in models. Like this"
         bid = Bid(text)
-        suggestions = bid.get_suggestions()
-        print("These are the following suggestions:")
+        suggestions = ProseLint.get_suggestions(bid.text)
         if suggestions is None:
             print("No suggestions")
         else:
-            print(suggestions)
+            for suggestion in suggestions:
+                print(suggestion)
 
