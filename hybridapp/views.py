@@ -16,6 +16,18 @@ from hybridapp.models import *
 def home(request):
     return render(request, 'hybridapp/home.html')
 
+# Dashboard
+def dashboard(request):
+    return render(request, 'hybridapp/dashboard.html')
+
+# Projects
+def projects(request):
+    return render(request, 'hybridapp/projects.html')
+
+# Logout
+def logout(request):
+    return HttpResponseRedirect(reverse('hybridapp:home'))
+
 # View to create a new project
 def new(request):
     print(request.method)
