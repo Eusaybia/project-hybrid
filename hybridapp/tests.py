@@ -18,15 +18,19 @@ class ProseLintTestCase(TestCase):
         pass
 
     def test_suggestions(self):
-        text = "Hello.   People have said\
-                You don't have much code, that to do some review. \
-                Only I want say, that not need place business-logic in models. Like this"
+        text = "Too many exclamation marks!!!!Also, missing space"
         suggestions = ProseLint.get_suggestions(text)
         if suggestions is None:
             print("No suggestions")
         else:
             for suggestion in suggestions:
                 print(suggestion)
+                
+    def test_error_count(self):
+        text = "Too many exclamation marks!!!!"
+        error_count = ProseLint.get_error_count(text)
+        actual_error_count = 1
+        self.assertEquals(error_count, actual_error_count)
                 
 class PyEnchantTestCase(TestCase):
     def setUp(self):
