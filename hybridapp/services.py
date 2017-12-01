@@ -1,5 +1,6 @@
 import requests
 import json
+import datetime
 
 employer_access_token = "q77Wx5W1sRouMU0sgaHEWbwnVskT7s"
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
@@ -73,6 +74,8 @@ def get_fl_projects_by_user_id(user_id):
                      headers=headers, params=params)
 
     projects = r.json()['result']['projects']
+    for project in projects:
+        project['submitdate'] = datetime.datetime.fromtimestamp(project['submitdate'])
 
     if len(projects) == 0:
         # List is empty

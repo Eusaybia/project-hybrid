@@ -6,22 +6,22 @@
 <h2>Projects</h2>
 <div class="ui cards">
     {% for project in projects %}
-    <div class="card">
+    <div class="ui raised card">
         <div class="content">
+            <span class="right floated"><i class="{{ project.currency.country|lower }} flag"></i></span>
             <div class="header">{{ project.title }}</div>
             <div class="meta">
-                <span class="right floated time">2 days ago</span>
-                <span class="budget">${{ project.budget.minimum }} - {{ project.budget.maximum }}</span>
+                <span class="right floated time">{{ project.submitdate|timesince }} ago</span>
+                <span class="budget">${{ project.budget.minimum }} - ${{ project.budget.maximum }}</span>
             </div>
             <div class="description">
-                <p>{{ project.description }}</p>
+                <p>{{ project.preview_description }}</p>
             </div>
         </div>
-        <a href="{% url 'hybridapp:projectbids' project.id %}">
-            <div class="ui teal bottom attached labeled icon button">
-                <i class="lab icon"></i>
-                Analyse Bids
-            </div>
+        <a href="{% url 'hybridapp:projectbids' project.id %}"class="ui teal bottom attached labeled
+                 {% if project.frontend_project_status != 'open' %}disabled{% endif %} icon button">
+            <i class="lab icon"></i>
+            Analyse  {{ project.bid_stats.bid_count }} Bids
         </a>
     </div>
     {% empty %}
