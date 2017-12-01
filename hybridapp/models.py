@@ -5,7 +5,6 @@ import json
 
 import proselint
 from enchant.checker import SpellChecker
-import execjs
 
 # Create your models here.
 class Bid():
@@ -53,7 +52,7 @@ class PyEnchant():
 class Pedant():
     @staticmethod
     def validate(text):
-        validatejs = execjs.compile("""
+        """validatejs = execjs.compile(
             validate : function(lines) {
                 var inQuote = false;
                 var currQuoteLength = 0;
@@ -136,7 +135,7 @@ class Pedant():
                 }
                 }
             }
-        """)
+        )"""
 
 
 class Project(object):
