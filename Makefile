@@ -11,6 +11,9 @@ run: check-venv
 migrate:
 	$(PYTHON) manage.py makemigrations
 	$(PYTHON) manage.py migrate
+	
+test:
+	$(PYTHON) manage.py test
 
 check-venv:
 ifndef VIRTUAL_ENV
