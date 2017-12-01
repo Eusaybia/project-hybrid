@@ -1,7 +1,7 @@
 import requests
 import json
 import datetime
-from hybridapp.models import Bid
+from hybridapp.models import Bid, LanguageCheck
 employer_access_token = "q77Wx5W1sRouMU0sgaHEWbwnVskT7s"
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
@@ -102,10 +102,10 @@ def get_bids_by_project_id(project_id):
     bids = r.json()['result']['bids']
     for bid in bids:
         bid['submitdate'] = datetime.datetime.fromtimestamp(bid['submitdate'])
-        bid_text = Bid(bid["description"])
-        bid["quality_score"] = bid_text.get_quality_score()
+        bid_text = bid["description"]
+        bid["quality_score"] = Bid.get_quality_score(bid_text)
         bid["fixed"] = LanguageCheck.fix(bid["description"])
-    
+
     if len(bids) == 0:
         # List is empty
         bids = None
