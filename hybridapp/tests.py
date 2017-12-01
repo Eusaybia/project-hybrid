@@ -13,12 +13,15 @@ class BidTestCase(TestCase):
         score = bid.get_quality_score()
         print(score)
         
+class ProseLintTestCase(TestCase):
+    def setUp(self):
+        pass
+
     def test_suggestions(self):
-        text = "Hello\
+        text = "Hello.   People have said\
                 You don't have much code, that to do some review. \
                 Only I want say, that not need place business-logic in models. Like this"
-        bid = Bid(text)
-        suggestions = ProseLint.get_suggestions(bid.text)
+        suggestions = ProseLint.get_suggestions(text)
         if suggestions is None:
             print("No suggestions")
         else:
@@ -30,7 +33,7 @@ class PyEnchantTestCase(TestCase):
         pass
         
     def test_error_count(self):
-        text = "Thissss hazzz three errorsz"
+        text = "Thiz txtt hazz three errors"
         error_count = PyEnchant.get_error_count(text)
         actual_error_count = 3
         self.assertEquals(error_count, actual_error_count)
