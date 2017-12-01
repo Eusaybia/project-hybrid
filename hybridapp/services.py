@@ -38,7 +38,9 @@ def new_fl_project():
 
     data = json.dumps(data)
 
-    r = requests.post('https://www.freelancer-sandbox.com/api/projects/0.1/projects/',
-                  headers=headers, params=params, data=data)
+    r = requests.post(
+        'https://www.freelancer-sandbox.com/api/projects/0.1/projects/',
+        headers=headers, params=params, data=data
+    )
 
     print(r.json())

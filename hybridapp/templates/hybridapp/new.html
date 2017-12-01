@@ -1,12 +1,13 @@
 {% extends 'hybridapp/layout.html' %} {% block css %}{% endblock %} {% block content %}
-<form class="ui form">
+<form method="POST" class="ui form">
+    {% csrf_token %}
     <div class="field">
         <label>Name of Project</label>
         <input name="project-name" placeholder="What you want to do" type="text">
     </div>
     <div class="field">
         <label>Areas of Learning</label>
-        <select multiple="" class="ui search dropdown">
+        <select name="project-skills" multiple="" class="ui search dropdown">
             <option value="">Skills involved</option>
             <option value="AF">C</option>
             <option value="AX">Java</option>
@@ -15,7 +16,7 @@
     </div>
     <div class="field">
         <label>What you want to learn and why</label>
-        <textarea placeholder="I'd like to learn about..."></textarea>
+        <textarea name="project-learn" placeholder="I'd like to learn about..."></textarea>
     </div>
     <div class="field">
         <label>Screening questions</label>

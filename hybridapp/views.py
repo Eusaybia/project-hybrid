@@ -7,18 +7,24 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Import API calls
 from hybridapp.services import *
 
+# Import models
+from hybridapp.models import *
+
 # Homepage
 def home(request):
     return render(request, 'hybridapp/home.html')
 
 # View to create a new project
 def new(request):
+    print(request.method)
     if request.method == 'POST':
+        print(request.POST.get('project-name'))
         # Process POST data here once the html template and form
         # is finished.
         # Create new project in our db
-        new_project()
+        # new_project()
         # Create new project using freelancer API
-        new_fl_project()
-    new_fl_project()
+        # new_fl_project()
+        # Redirect to home page
+        return HttpResponseRedirect(reverse('hybridapp:home'))
     return render(request, 'hybridapp/new.html')
