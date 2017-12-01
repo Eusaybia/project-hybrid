@@ -3,14 +3,13 @@
 {% include "hybridapp/includes/_navbar.html" %}
 {% endblock %}
 {% block content %}
-  <h2>Bids</h2>
-  {% if bids is none %}
-    <p>There are no bids for this project.</p>
-  {% else %}
-    {% for bid in bids %}
-      <div>
-        Bid text here
-      </div>
-    {% endfor %}
-  {% endif %}
+<h2>Bids</h2>
+{% for bid in bids %}
+<div>
+    Bid text here
+</div>
+{% empty %}
+<p>There are no bids for this project.</p>
+{% endfor %}
+
 {% endblock %}
