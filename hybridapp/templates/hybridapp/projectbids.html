@@ -22,10 +22,14 @@
             </div>
         </div>
         <div class="extra content">
-            <a id="errors">
+            <a class="errors">
                 <i class="warning sign icon"></i>
-                X Errors in original bid
+                {{ bid.num_errors }} Errors in original bid
             </a>
+            <span class="right floated num-errors">
+                <i class="line chart icon"></i>
+                Quality: {{ bid.quality_score }}
+            </span>
         </div>
         <a class="ui green bottom attached labeled icon button" href="#"><i class="checkmark icon"></i> Accept bid</a>
     <div class="ui raised card">
@@ -57,8 +61,8 @@
 {% block javascript %}
 <script>
     $(function() {
-        $("#errors").click(function() {
-            $(this).parent().parent().find(".description").toggle();
+        $(".errors").click(function() {
+            $(this).parent().parent().find(".description").toggle(400);
         })
     });
 </script>
