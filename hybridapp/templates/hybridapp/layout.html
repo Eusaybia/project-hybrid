@@ -13,10 +13,8 @@
 {% block css %}{% endblock %}
 
 <body>
+    {% include "hybridapp/includes/_navbar.html" %}
     {% block navbar %}{% endblock %}
-    <header class="container center-align">
-        <h1>Hybrid</h1>
-    </header>
     <div class="ui container">
         {% block content %}{% endblock %}
         <br>
