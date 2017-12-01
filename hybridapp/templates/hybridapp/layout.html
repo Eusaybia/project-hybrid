@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+   <!-- Compiled and minified CSS -->
+  <title>Hybrid</title>
+</head>
+
+{% block css %}{% endblock %}
+
+<body>
+  {% block navbar %}{% endblock %}
+  <header class="container center-align">
+    <h1>Hybrid</h1>
+  </header>
+  <div class="container">
+    {% block content %}{% endblock %}
+    <br>
+  </div>
+  {% block javascript %}{% endblock %}
+</body>
+
+</html>
