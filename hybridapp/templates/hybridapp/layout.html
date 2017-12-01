@@ -13,11 +13,14 @@
 {% block css %}{% endblock %}
 
 <body>
-    {% include "hybridapp/includes/_navbar.html" %}
-    {% block navbar %}{% endblock %}
-    <div class="ui container">
-        {% block content %}{% endblock %}
-        <br>
+    <div class="ui centered grid">
+        <div class="twelve wide computer twelve wide tablet sixteen wide mobile column">
+            {% include "hybridapp/includes/_navbar.html" %}
+            {% block navbar %}{% endblock %}
+            <div class="ui bottom attached segment">
+            {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
     {% block javascript %}{% endblock %}
 </body>
