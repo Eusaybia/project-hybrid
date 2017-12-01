@@ -8,9 +8,32 @@ class BidTestCase(TestCase):
         pass
         
     def test_scoring(self):
-        text = "THis is no grammar.Lol"
-        bid = Bid(text)
-        score = bid.get_quality_score()
+        text0 = "Hi,\
+                Greetings for the day,\n\
+                We do unrstand your neds and would love to help you out on this one.\n\
+                We have en devping/maintaining various web applications in Python Django. Mostly these applications are hosted on clouds (AWS/Linode) and have SASS, CoffeeScript, AngularJS/JQuery, Bootstrap as front end technologies along with Python backend.\n\
+                Few Pyth/Django applicions that we have worked on in the past are listed below for your quick reference:\n\
+                "
+        text1 = "Hi,\
+                Greetings for the day,\n\
+                We do understand your needs and would love to help you out on this one.\n\
+                We have been developing/maintaining various web applications in Python Django. Mostly these applications are hosted on clouds (AWS/Linode) and have SASS, CoffeeScript, AngularJS/JQuery, Bootstrap as front end technologies along with Python backend.\n\
+                Few Python/Django applications that we have worked on in the past are listed below for your quick reference:\n\
+                "
+        text2 = "I’m excited to share with you the proposal ,i am an expert in project you mentioned ,\
+                Imagination and creativity can change the world .\
+                we are creative and imaginative \
+                We guarantee you to submit the work  within timeline and as per your expectations.\
+                i understand your project very well and i will complete this work within 24 hours . i have completed many similar projects before , so i hope you choose me to work with you.\
+                I will help you untill you get fulfilled from my work."
+        score = bid.get_quality_score(text0)
+        print("0")
+        print(score)
+        score = bid1.get_quality_score(text1)
+        print("1")
+        print(score)
+        score = bid2.get_quality_score(textw)
+        print("2")
         print(score)
         
 class ProseLintTestCase(TestCase):
@@ -18,15 +41,19 @@ class ProseLintTestCase(TestCase):
         pass
 
     def test_suggestions(self):
-        text = "Hello.   People have said\
-                You don't have much code, that to do some review. \
-                Only I want say, that not need place business-logic in models. Like this"
+        text = "Too many exclamation marks!!!!Also, missing space"
         suggestions = ProseLint.get_suggestions(text)
         if suggestions is None:
             print("No suggestions")
         else:
             for suggestion in suggestions:
                 print(suggestion)
+                
+    def test_error_count(self):
+        text = "Too many exclamation marks!!!! Too  many spaces too"
+        error_count = ProseLint.get_error_count(text)
+        actual_error_count = 2
+        self.assertEquals(error_count, actual_error_count)
                 
 class PyEnchantTestCase(TestCase):
     def setUp(self):
@@ -42,6 +69,8 @@ class PedantTestCase(TestCase):
     def setUp(self):
         pass
         
-    def test_validate(self):
-        text = "Full stop.Without a space before."
-        Pedant.validate(text)
+    def test_error_count(self):
+        text = "The quick brown fox,jumped over,the lazy dog"
+        error_count = Pedant.get_error_count(text)
+        actual_error_count = 2
+        self.assertEquals(error_count, actual_error_count)

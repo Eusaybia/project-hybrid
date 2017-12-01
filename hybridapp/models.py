@@ -4,20 +4,41 @@ import json
 
 import proselint
 from enchant.checker import SpellChecker
+import language_check
+import execjs
+import os
+import sys
 
 # Create your models here.
 class Bid(object):
     def __init__(self, text):
         self.text = text
 
-    def get_quality_score(self):
-        score = 0
-        return score
-
-    def get_suggestions(self):
-        text = "Hello You don't have much code, that to do some review. Only I want say, that not need place business-logic in models. Like this"
-        bid = Bid(text)
-
+    @staticmethod
+    def get_quality_score(text):
+        n_characters = len(text)
+        n_errors = 0
+        n_errors += LanguageCheck.get_error_count(text)
+        n_errors += ProseLint.get_error_count(text)
+        n_errors += PyEnchant.get_error_count(text)
+        n_errors += Pedant.get_error_count(text)
+        return n_characters / (n_errors * 1.0)
+    
+# Checks grammar and spelling
+class LanguageCheck():
+    @staticmethod
+    def get_error_count(text):
+        tool = language_check.LanguageTool('en-AU')
+        matches = tool.check(text)
+        return len(matches)
+    
+    @staticmethod
+    def fix(text):
+        tool = language_check.LanguageTool('en-AU')
+        matches = tool.check(text)
+        return language_check.correct(text, matches)
+    
+# Checks grammar
 class ProseLint():
     @staticmethod
     def get_suggestions(text):
@@ -29,8 +50,11 @@ class ProseLint():
         suggestions = proselint.tools.lint(text)
         return(len(suggestions))
 
+        
+# Checks spelling
 # You need to install some dependecies for PyEnchant to work
 # https://stackoverflow.com/questions/21083059/enchant-c-library-not-found-while-installing-pyenchant-using-pip-on-osx
+# Reference for PyEnchant: http://pythonhosted.org/pyenchant/tutorial.html
 class PyEnchant():
     @staticmethod
     def get_errors(text):
@@ -43,99 +67,26 @@ class PyEnchant():
         checker = SpellChecker("en_AU")
         checker.set_text(text)
         return len(list(checker))
-
-# Another class for punctuation checking
-# https://github.com/Decagon/Pedant
-# You need to
-# sudo apt-get install nodejs
+        
+# Checks punctuation
+# https://github.com/Decagon/Pedant 
+# You need to:
+# make init-js
+# Uses this as reference: https://www.codementor.io/jstacoder/integrating-nodejs-python-how-to-write-cross-language-modules-pyexecjs-du107xfep
 class Pedant():
     @staticmethod
-    def validate(text):
-        """validatejs = execjs.compile(
-            validate : function(lines) {
-                var inQuote = false;
-                var currQuoteLength = 0;
-                var quoteStartIndex = 0;
-                var MAX_QUOTE_LENGTH = 20;
-                var MAX_PUNCTUATION_LENGTH = 3;
-                var punctuation = [ ',', '.', '!', ';', ';', '"' ];
-                var punctuationAmount = 0;
-                var punctuationStartIndex = 0;
-                var quotes = [ '"', "'" ];
-                var contractionEndings =
-                    [ 't', 's', 'm', 're', 's', 've', 'd', 'll', 'em' ];
-
-                function printError(msg, type, line, col) {
-                console.log(msg + ", " + type + ", line " + (line + 1) + ", col " +
-                            (col + 1));
-                }
-
-                lines = lines.split("\n");
-                for (var j = 0; j < lines.length; j++) {
-                text = lines[j];
-                for (var i = 0; i < text.length; i++) {
-                    if ("(".indexOf(text[i]) > -1) {
-                    if ("(".indexOf(text[i + 1]) > -1) {
-                        printError("too many parenthesis", "PunctuationError", j, i);
-                    }
-                    }
-
-                    if (punctuation.indexOf(text[i]) > -1) {
-                    if (punctuationAmount == 0) {
-                        punctuationStartIndex = i;
-                    }
-                    punctuationAmount++;
-
-                    if ((text[i + 1] != ")") && (text[i + 1] != " ")) {
-                        printError("no space after punctuation", "PunctuationError", j,
-                                punctuationStartIndex);
-                    }
-
-                    } else {
-                    punctuationStartIndex = 0;
-                    punctuationAmount = 0;
-                    }
-                    if (punctuationAmount > MAX_PUNCTUATION_LENGTH) {
-                    printError("too much punctuation", "PunctuationError", j,
-                                punctuationStartIndex);
-
-                    punctuationStartIndex = 0;
-                    punctuationAmount = 0;
-                    }
-
-                    // on a space
-                    if (" ".indexOf(text[i]) > -1) {
-                    if (((text[i + 1] == " ") || (text[i + 1] == ")"))) {
-                        printError("too much whitespace", "WhitespaceError", j, i);
-                    }
-                    }
-                    // found a quote that didn't end after sentence
-                    if ((text[i + 1] == undefined) && inQuote) {
-                    inQuote = false;
-                    printError("unclosed quote", "QuoteError", j, quoteStartIndex);
-                    }
-
-                    // okay, we found a quote
-                    if (quotes.indexOf(text[i]) > -1) {
-                    // proper contraction detection using xor
-                    var a = ((contractionEndings.indexOf(text[i + 1]) == -1));
-                    var b = text[i] == "'";
-                    var xor = (a ? !b : b);
-                    if ((!inQuote) && !xor) {
-                        quoteStartIndex = i;
-                        inQuote = true;
-                    } else {
-                        if ((i - quoteStartIndex) > MAX_QUOTE_LENGTH) {
-                        printError("quote too long", "QuoteError", j, quoteStartIndex);
-                        inQuote = false;
-                        }
-                    }
-                    }
-                }
-                }
+    def get_error_count(lines):
+        runtime = execjs.get('Node')
+        context = runtime.compile('''
+            module.paths.push('%s');
+            var pedant = require('pedantjs');
+            function validate(lines) {
+                return pedant.validate(lines);
             }
-        )"""
+        ''' % os.path.join(os.path.dirname(__file__),'node_modules'))
 
+        result = context.call("validate", lines)
+        return result
 
 class Project(object):
     def __init__(self, title, description, budget, jobs):
@@ -277,3 +228,6 @@ if __name__ == "__main__":
     db_project = DBProject(project_id)
     db_project_store = DBProjectStore()
     db_project_store.add_project(db_project)
+        
+
+
