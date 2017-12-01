@@ -4,7 +4,7 @@ import json
 employer_access_token = "E1xFOLBVdL9QvAfXhgDu0nQjgh4O22"
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
-def new_fl_project():
+'''def new_fl_project():
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
@@ -43,7 +43,7 @@ def new_fl_project():
         headers=headers, params=params, data=data
     )
 
-    print(r.json())
+    print(r.json())'''
 
 def get_fl_project(project_id):
     headers = {
@@ -79,3 +79,27 @@ def get_fl_projects_by_user_id(user_id):
         projects = None
 
     return projects
+
+def get_bids_by_project_id(project_id):
+    headers = {
+        'content-type': 'application/json',
+        # Using the API key for the 'testemployer' account
+        'freelancer-oauth-v1': employer_access_token,
+    }
+
+    params = (
+        ('compact', ''),
+        ('projects[]', [project_id]),
+    )
+
+    r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/bids/',
+                     headers=headers, params=params)
+
+    print(r.json())
+    bids = r.json()['result']['bids']
+
+    if len(bids) == 0:
+        # List is empty
+        bids = None
+
+    return bids

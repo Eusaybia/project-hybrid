@@ -31,7 +31,7 @@ def projects(request):
 
 # View to view bids for a specific project
 def projectbids(request, project_id):
-    bids = []
+    bids = get_bids_by_project_id(project_id)
     context = {
         'bids': bids
     }
