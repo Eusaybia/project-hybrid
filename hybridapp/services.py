@@ -98,8 +98,10 @@ def get_bids_by_project_id(project_id):
     r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/bids/',
                      headers=headers, params=params)
 
-    print(r.json())
+    # print(r.json())
     bids = r.json()['result']['bids']
+    for bid in bids:
+        bid['submitdate'] = datetime.datetime.fromtimestamp(bid['submitdate'])
 
     if len(bids) == 0:
         # List is empty
