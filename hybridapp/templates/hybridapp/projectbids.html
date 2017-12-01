@@ -7,14 +7,17 @@
 <h2>Bids</h2>
 <div class="ui cards">
     {% for bid in bids %}
-    <div class="ui raised card">
+    <div class="ui raised fluid card">
         <div class="content">
             <div class="header">A bid</div>
             <div class="meta">
                 <span class="right floated time">{{ bid.submitdate|naturaltime }}</span>
                 <span class="amount">${{ bid.amount }}</span>
             </div>
-            <div class="description">
+            <div class="description fixed">
+                <p>{{ bid.fixed }}</p>
+            </div>
+            <div class="description orginal" style="display:none;">
                 <p>{{ bid.description }}</p>
             </div>
         </div>
@@ -30,25 +33,13 @@
     <p>There are no bids for this project.</p>
     {% endfor %}
 </div>
-<div class="ui modal">
-    <div class="header">Modal</div>
-    <div class="content">
-        <p>This is content</p>
-    </div>
-    <div class="actions">
-        <div class="ui deny button labeled icon button">
-            Cancel
-            <i class="cancel icon"></i>
-        </div>
-        <div class="ui positive labeled icon button">
-            Request Access
-            <i class="send outline icon"></i>
-        </div>
-    </div>
-</div>
 {% endblock %}
 {% block javascript %}
 <script>
-    $(".ui.modal").modal("attach events", "#errors", "show");
+    $(function() {
+        $("#errors").click(function() {
+            $(this).parent().parent().find(".description").toggle();
+        })
+    });
 </script>
 {% endblock %}
