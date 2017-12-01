@@ -13,7 +13,6 @@ class Bid():
         score = 0
         return score
     
-    
 class ProseLint():
     @staticmethod
     def get_suggestions(text):
@@ -24,11 +23,10 @@ class ProseLint():
     def get_error_count(text):
         suggestions = proselint.tools.lint(text)
         return(len(suggestions))
-
     
+# You need to install some dependecies for PyEnchant to work
+# https://stackoverflow.com/questions/21083059/enchant-c-library-not-found-while-installing-pyenchant-using-pip-on-osx
 class PyEnchant():
-    # You need to install some dependecies for PyEnchant to work
-    # https://stackoverflow.com/questions/21083059/enchant-c-library-not-found-while-installing-pyenchant-using-pip-on-osx
     @staticmethod
     def get_errors(text):
         checker = SpellChecker("en_AU")
@@ -43,6 +41,8 @@ class PyEnchant():
         
 # Another class for punctuation checking
 # https://github.com/Decagon/Pedant 
+# You need to 
+# sudo apt-get install nodejs
 class Pedant():
     @staticmethod
     def validate(text):
