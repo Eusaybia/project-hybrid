@@ -21,12 +21,12 @@ def make_bid(project_id, bidder_id, amount, period, milestone_percentage, descri
     params = (
         ('compact', ''),
     )
-    
+
     data = json.dumps(data)
 
     r = requests.post('https://www.freelancer-sandbox.com/api/projects/0.1/bids/?compact',
             headers=headers, params=params, data=data)
-    
+
     # Print response
     bid_response = r.json()
     if bid_response["status"] != "success":
@@ -62,7 +62,7 @@ def make_project(title, description, jobs):
 
     r = requests.post('https://www.freelancer-sandbox.com/api/projects/0.1/projects/',
               headers=headers, params=params, data=data)
-    
+
     project_json = r.json()
     if project_json["status"] != "success":
         # Print response
@@ -149,7 +149,7 @@ while user_input != "q":
                 print(project["title"])
                 print("Project id: " + str(project["id"]))
                 print("")
-        
+
         # Default project
         title = "Default project title"
         description = "Default project description"
@@ -163,13 +163,13 @@ while user_input != "q":
         data = input("Enter comma separated jobs (leave blank for default -- RECOMMENDED): ")
         if data:
             jobs = [int(x) for x in data.split(",")]
-        
+
         # Make the project
         if make_project(title, description, jobs) == None:
             print("Making project was NOT successful")
         else:
             print("Project made successfully")
-                
+
     elif user_input == "b":
         projects = get_fl_projects_by_user_id(employer_id)
         if projects:
@@ -188,7 +188,7 @@ while user_input != "q":
                     print("")
                 else:
                     print("No current bids")
-                
+
                 # Set some defaults
                 bidder_id = freelancer_id
                 amount = 100
@@ -207,12 +207,12 @@ while user_input != "q":
                 data = input("Enter description (must be at least 5 chars) (leave blank for default): ")
                 if data:
                     description = data
-                
+
                 if make_bid(project_id, bidder_id, amount, period, milestone_percentage, description) == None:
                     print("Bid was NOT successful")
                 else:
                     print("Bid was successful")
-                
+
             else:
                 print("Invalid project id")
         else:
