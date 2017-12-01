@@ -26,5 +26,9 @@ def new(request):
         # Create new project using freelancer API
         # new_fl_project()
         # Redirect to home page
-        return HttpResponseRedirect(reverse('hybridapp:home'))
+        return HttpResponseRedirect(reverse('hybridapp:success'))
     return render(request, 'hybridapp/new.html')
+
+# Page displayed upon successfully creating project.
+def success(request):
+    return render(request, 'hybridapp/success.html')
