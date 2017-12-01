@@ -3,14 +3,29 @@
 {% include "hybridapp/includes/_navbar.html" %}
 {% endblock %}
 {% block content %}
-  <h2>Projects</h2>
-  {% if projects is none %}
-    <p>You have no existing projects.</p>
-  {% else %}
+<h2>Projects</h2>
+<div class="ui cards">
     {% for project in projects %}
-      <div>
-        <a href="{% url 'hybridapp:projectbids' project.id %}">This is project {{ project.id }}</a>
-      </div>
+    <div class="card">
+        <div class="content">
+            <div class="header">{{ project.title }}</div>
+            <div class="meta">
+                <span class="right floated time">2 days ago</span>
+                <span class="budget">${{ project.budget.minimum }} - {{ project.budget.maximum }}</span>
+            </div>
+            <div class="description">
+                <p>{{ project.description }}</p>
+            </div>
+        </div>
+        <a href="{% url 'hybridapp:projectbids' project.id %}">
+            <div class="ui teal bottom attached labeled icon button">
+                <i class="lab icon"></i>
+                Analyse Bids
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <p>You have no existing projects.</p>
     {% endfor %}
-  {% endif %}
+</div>
 {% endblock %}
