@@ -16,4 +16,5 @@ def new(request):
     if request.method == 'POST':
         # Process POST data here once the html template and form
         # is finished.
+        pass
     return render(request, 'hybridapp/new.html')
