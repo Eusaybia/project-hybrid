@@ -42,7 +42,8 @@ class PedantTestCase(TestCase):
     def setUp(self):
         pass
         
-    def test_validate(self):
-        text = "The quick brown fox,jumped over the lazy dog"
-        print("Validating")
-        print(Pedant.validate(text))
+    def test_error_count(self):
+        text = "The quick brown fox,jumped over,the lazy dog"
+        error_count = Pedant.get_error_count(text)
+        actual_error_count = 2
+        self.assertEquals(error_count, actual_error_count)
