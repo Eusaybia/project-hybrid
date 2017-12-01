@@ -43,5 +43,6 @@ class PedantTestCase(TestCase):
         pass
         
     def test_validate(self):
-        text = "Full stop.Without a space before."
-        Pedant.validate(text)
+        text = "The quick brown fox,jumped over the lazy dog"
+        print("Validating")
+        print(Pedant.validate(text))
