@@ -1,6 +1,11 @@
 {% extends 'hybridapp/layout.html' %}
 
 {% block content %}
-  <h1>This is the homepage</h1>
-  <a href="{% url 'hybridapp:new' %}">Link to new project form</a>
+<div class="ui center aligned segment">
+  <h1>Welcome to Freelancer Elite <i class="blue student icon"></i></h1>
+  <a href="{% url 'hybridapp:dashboard' %}"><button class="ui primary right labeled icon button">
+        <i class="sign in icon"></i>
+        Login
+      </button></a>
+    </div>
 {% endblock %}

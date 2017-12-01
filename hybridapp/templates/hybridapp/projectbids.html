@@ -1,0 +1,15 @@
+{% extends 'hybridapp/layout.html' %}
+{% block navbar %}
+{% include "hybridapp/includes/_navbar.html" %}
+{% endblock %}
+{% block content %}
+<h2>Bids</h2>
+{% for bid in bids %}
+<div>
+    Bid text here
+</div>
+{% empty %}
+<p>There are no bids for this project.</p>
+{% endfor %}
+
+{% endblock %}

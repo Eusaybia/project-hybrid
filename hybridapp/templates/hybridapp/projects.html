@@ -1,0 +1,31 @@
+{% extends 'hybridapp/layout.html' %}
+{% block navbar %}
+{% include "hybridapp/includes/_navbar.html" %}
+{% endblock %}
+{% block content %}
+<h2>Projects</h2>
+<div class="ui cards">
+    {% for project in projects %}
+    <div class="ui raised card">
+        <div class="content">
+            <span class="right floated"><i class="{{ project.currency.country|lower }} flag"></i></span>
+            <div class="header">{{ project.title }}</div>
+            <div class="meta">
+                <span class="right floated time">{{ project.submitdate|timesince }} ago</span>
+                <span class="budget">${{ project.budget.minimum }} - ${{ project.budget.maximum }}</span>
+            </div>
+            <div class="description">
+                <p>{{ project.preview_description }}</p>
+            </div>
+        </div>
+        <a href="{% url 'hybridapp:projectbids' project.id %}"class="ui teal bottom attached labeled
+                 {% if project.frontend_project_status != 'open' %}disabled{% endif %} icon button">
+            <i class="lab icon"></i>
+            Analyse  {{ project.bid_stats.bid_count }} Bids
+        </a>
+    </div>
+    {% empty %}
+    <p>You have no existing projects.</p>
+    {% endfor %}
+</div>
+{% endblock %}
