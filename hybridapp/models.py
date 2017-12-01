@@ -43,18 +43,22 @@ class PyEnchant():
         
 # Another class for punctuation checking
 # https://github.com/Decagon/Pedant 
-# You need to 
-# sudo apt-get install nodejs
+# You need to:
+# make init-js
+# Uses this as reference: https://www.codementor.io/jstacoder/integrating-nodejs-python-how-to-write-cross-language-modules-pyexecjs-du107xfep
 class Pedant():
     @staticmethod
     def validate(text):
         runtime = execjs.get('Node')
-        context = runtime.compile("""
-            function add(x, y) {
-                return x + y;
+        context = runtime.compile('''
+            module.paths.push('%s');
+            var pedant = require('pedantjs');
+            function validate(text) {
+                return pedant.validate(text);
             }
-         """)
-        result = context.call("add", 1, 2)
-        print(result)
+        ''' % os.path.join(os.path.dirname(__file__),'node_modules'))
+        result = context.call("validate", text)
+        return result
 
-
+# Another possible checker
+# https://github.com/GitbookIO/rousseau
