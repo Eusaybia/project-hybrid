@@ -26,14 +26,22 @@ class BidTestCase(TestCase):
                 We guarantee you to submit the work  within timeline and as per your expectations.\
                 i understand your project very well and i will complete this work within 24 hours . i have completed many similar projects before , so i hope you choose me to work with you.\
                 I will help you untill you get fulfilled from my work."
-        score = bid.get_quality_score(text0)
+        text3 = "I'm really excited to help you with your proposal. I have extensive experience in the technologies you listed."
+        text4 = "A a a a a a a a a a."
+        score = Bid.get_quality_score(text0)
         print("0")
         print(score)
-        score = bid1.get_quality_score(text1)
+        score = Bid.get_quality_score(text1)
         print("1")
         print(score)
-        score = bid2.get_quality_score(textw)
+        score = Bid.get_quality_score(text2)
         print("2")
+        print(score)
+        score = Bid.get_quality_score(text3)
+        print("3")
+        print(score)
+        score = Bid.get_quality_score(text4)
+        print("4")
         print(score)
         
 class ProseLintTestCase(TestCase):

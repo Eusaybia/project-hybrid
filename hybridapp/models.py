@@ -5,6 +5,7 @@ from enchant.checker import SpellChecker
 import language_check
 
 import execjs
+import math
 import os
 import sys
 
@@ -21,7 +22,8 @@ class Bid():
         n_errors += ProseLint.get_error_count(text)
         n_errors += PyEnchant.get_error_count(text)
         n_errors += Pedant.get_error_count(text)
-        return n_characters / (n_errors * 1.0)
+        # Returns a score out of 100
+        return math.atan(n_characters / (n_errors * 1.1)) / math.pi * 200
     
 # Checks grammar and spelling
 class LanguageCheck():
