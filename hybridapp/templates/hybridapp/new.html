@@ -1,5 +1,6 @@
 {% extends 'hybridapp/layout.html' %} {% block css %}{% endblock %} {% block content %}
-<form class="ui form">
+<form method="POST" class="ui form">
+    {% csrf_token %}
     <div class="field">
         <label>Name of Project</label>
         <input name="project-name" placeholder="What you want to do" type="text">
