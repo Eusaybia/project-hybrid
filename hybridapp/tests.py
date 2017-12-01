@@ -27,9 +27,9 @@ class ProseLintTestCase(TestCase):
                 print(suggestion)
                 
     def test_error_count(self):
-        text = "Too many exclamation marks!!!!"
+        text = "Too many exclamation marks!!!! Too  many spaces too"
         error_count = ProseLint.get_error_count(text)
-        actual_error_count = 1
+        actual_error_count = 2
         self.assertEquals(error_count, actual_error_count)
                 
 class PyEnchantTestCase(TestCase):
