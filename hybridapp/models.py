@@ -11,8 +11,6 @@ class Project(object):
         self._budget = budget
         self._jobs = jobs
     
-    
-    
     # Title
     @property
     def title(self):
