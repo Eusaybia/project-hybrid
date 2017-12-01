@@ -22,7 +22,20 @@ def dashboard(request):
 
 # Projects
 def projects(request):
-    return render(request, 'hybridapp/projects.html')
+    user_id = 25832154
+    projects = get_fl_projects_by_user_id(user_id)
+    context = {
+        'projects': projects
+    }
+    return render(request, 'hybridapp/projects.html', context=context)
+
+# View to view bids for a specific project
+def projectbids(request, project_id):
+    bids = []
+    context = {
+        'bids': bids
+    }
+    return render(request, 'hybridapp/projectbids.html', context=context)
 
 # Logout
 def logout(request):

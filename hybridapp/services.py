@@ -52,9 +52,30 @@ def get_fl_project(project_id):
         'freelancer-oauth-v1': employer_access_token,
     }
 
-    #25832154
-
     r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/15339120',
                      headers=headers)
 
     print(r.json())
+
+def get_fl_projects_by_user_id(user_id):
+    headers = {
+        'content-type': 'application/json',
+        # Using the API key for the 'testemployer' account
+        'freelancer-oauth-v1': employer_access_token,
+    }
+
+    params = (
+        ('compact', ''),
+        ('owners[]', [user_id]),
+    )
+
+    r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/',
+                     headers=headers, params=params)
+
+    projects = r.json()['result']['projects']
+
+    if len(projects) == 0:
+        # List is empty
+        projects = None
+
+    return projects

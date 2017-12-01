@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^success/$', views.success, name='success'),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^projects/$', views.projects, name='projects'),
+    url(r'^projectbids/(?P<project_id>\d+)', views.projectbids, name='projectbids'),
     url(r'^logout/$', views.logout, name='logout')
 ]
