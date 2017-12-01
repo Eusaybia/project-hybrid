@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from hybridapp.models import Bid, ProseLint, PyEnchant
+from hybridapp.models import Bid, ProseLint, PyEnchant, Pedant
 
 # Create your tests here.
 class BidTestCase(TestCase):
@@ -35,4 +35,10 @@ class PyEnchantTestCase(TestCase):
         actual_error_count = 3
         self.assertEquals(error_count, actual_error_count)
         
-
+class PedantTestCase(TestCase):
+    def setUp(self):
+        pass
+        
+    def test_validate(self):
+        text = "Full stop.Without a space before."
+        Pedant.validate(text)
