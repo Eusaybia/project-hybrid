@@ -10,6 +10,12 @@ def home(request):
 
 # View to create a new project
 def new(request):
-    # Process POST data here once the html template and form
-    # is finished.
+    if request.method == 'POST':
+        # Process POST data here once the html template and form
+        # is finished.
+        headers = {
+            'content-type': 'application/json',
+            # Using the API key for the 'testemployer' account
+            'freelancer-oauth-v1': '<oauth_access_token>',
+        }
     return render(request, 'hybridapp/new.html')
