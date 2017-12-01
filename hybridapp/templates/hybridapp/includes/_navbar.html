@@ -1,0 +1,23 @@
+<div class="ui stackable fixed huge menu">
+    <div class="ui container">
+        <div class="ui header item">
+            Project Hybrid
+        </div>
+        <a class="item" href="{% url 'hybridapp:dashboard' %}">
+            <i class="home icon"></i>
+            Dashboard
+        </a>
+        <a class="item" href="{% url 'hybridapp:new' %}">
+            <i class="book icon"></i>
+            Create a project
+        </a>
+        <a class="item" href="{% url 'hybridapp:projects' %}">
+            <i class="file text outline icon"></i>
+            View existing projects
+        </a>
+        <a class="item" href="{% url 'hybridapp:logout' %}">
+            <i class="sign out icon"></i>
+            Logout
+        </a>
+    </div>
+</div>

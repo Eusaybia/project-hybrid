@@ -1,4 +1,9 @@
-{% extends 'hybridapp/layout.html' %} {% block css %}{% endblock %} {% block content %}
+{% extends 'hybridapp/layout.html' %}
+{% block navbar %}
+{% include "hybridapp/includes/_navbar.html" %}
+{% endblock %}
+{% block content %}
+<h2>Create a new project</h2>
 <form method="POST" class="ui form">
     {% csrf_token %}
     <div class="field">
