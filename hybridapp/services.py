@@ -1,12 +1,44 @@
 import requests
+import json
 
 employer_access_token = "E1xFOLBVdL9QvAfXhgDu0nQjgh4O22"
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
-def new_project():
+def new_fl_project():
     headers = {
-    'content-type': 'application/json',
-    # Using the API key for the 'testemployer' account
-    'freelancer-oauth-v1': '<oauth_access_token>',
+        'content-type': 'application/json',
+        # Using the API key for the 'testemployer' account
+        'freelancer-oauth-v1': employer_access_token,
     }
 
+    params = (
+        ('compact', ''),
+    )
+
+    data = {
+        "title": "Fix my PHP website",
+        "description": "I wrote a small website in PHP but it does not work. I someone to fix it.",
+        "currency": {
+            "code": "AUD",
+            "id": 3,
+            "sign": "$"
+        },
+        "budget": {
+            "minimum": 500
+        },
+        "jobs": [
+            {
+                "id": 3
+            },
+            {
+                "id": 17
+            }
+        ]
+    }
+
+    data = json.dumps(data)
+
+    r = requests.post('https://www.freelancer-sandbox.com/api/projects/0.1/projects/',
+                  headers=headers, params=params, data=data)
+
+    print(r.json())
