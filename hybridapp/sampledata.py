@@ -1,7 +1,7 @@
 import requests
 import json
 
-employer_access_token = "E1xFOLBVdL9QvAfXhgDu0nQjgh4O22"
+employer_access_token = "q77Wx5W1sRouMU0sgaHEWbwnVskT7s"
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
 def make_bid(project_id, bidder_id, amount, period, milestone_percentage, description):
