@@ -18,7 +18,7 @@ def home(request):
 
 # View to create a new project
 def new(request):
-    print(request.method)
+
     if request.method == 'POST':
         # Get form fields
         project_name = request.POST.get('project-name')
@@ -28,29 +28,31 @@ def new(request):
         min_bid = request.POST.get('min-bid')
         max_bid = request.POST.get('max-bid')
 
-        # Process POST data here once the html template and form
-        # is finished.
+        print(project_skills)
 
-        # Create new project in our db
-        # new_project()
+        # Process POST data...
+        # 1. Create project object
+        budget = Budget(min_bid, max_bid)
+        project = Project(project_name, project_learn, budget, [3,17])
 
-        # Create new project using freelancer API
-        # new_fl_project()
+        # 2. Call Freelancer API to post project, and retrieve project_id.
+        store = ProjectStore()
+        project_id = store.post_project(project)
 
-        # Redirect to home page
+        # 3. Store project_id in our local db.
+        db_project = DBProject(project_id)
+        db_project_store = DBProjectStore()
+        db_project_store.add_project(db_project)
+
+        # Redirect to success page
         return HttpResponseRedirect(reverse('hybridapp:success'))
 
-    # Testing
-    budget = Budget(100, 200)
-    project = Project("Matt Test", "Description test", budget, [3,17])
-    store = ProjectStore()
-    project_id = store.post_project(project)
+        # N.B No error handling!!
+        #15339120
+        #15339110
+        #15339118
+    get_fl_project(15339120)
 
-    db_project = DBProject(project_id)
-    db_project_store = DBProjectStore()
-    db_project_store.add_project(db_project)
-
-    # End Testing
     return render(request, 'hybridapp/new.html')
 
 # Page displayed upon successfully creating project.

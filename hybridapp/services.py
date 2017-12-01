@@ -44,3 +44,17 @@ def new_fl_project():
     )
 
     print(r.json())
+
+def get_fl_project(project_id):
+    headers = {
+        'content-type': 'application/json',
+        # Using the API key for the 'testemployer' account
+        'freelancer-oauth-v1': employer_access_token,
+    }
+
+    #25832154
+
+    r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/15339120',
+                     headers=headers)
+
+    print(r.json())
