@@ -48,16 +48,17 @@ class PyEnchant():
 # Uses this as reference: https://www.codementor.io/jstacoder/integrating-nodejs-python-how-to-write-cross-language-modules-pyexecjs-du107xfep
 class Pedant():
     @staticmethod
-    def validate(text):
+    def validate(lines):
         runtime = execjs.get('Node')
         context = runtime.compile('''
             module.paths.push('%s');
             var pedant = require('pedantjs');
-            function validate(text) {
-                return pedant.validate(text);
+            function validate(lines) {
+                return pedant.validate(lines);
             }
         ''' % os.path.join(os.path.dirname(__file__),'node_modules'))
-        result = context.call("validate", text)
+
+        result = context.call("validate", lines)
         return result
 
 # Another possible checker
