@@ -26,16 +26,13 @@ class BidTestCase(TestCase):
                 We guarantee you to submit the work  within timeline and as per your expectations.\
                 i understand your project very well and i will complete this work within 24 hours . i have completed many similar projects before , so i hope you choose me to work with you.\
                 I will help you untill you get fulfilled from my work."
-        bid = Bid(text0)
-        score = bid.get_quality_score()
+        score = bid.get_quality_score(text0)
         print("0")
         print(score)
-        bid1 = Bid(text1)
-        score = bid1.get_quality_score()
+        score = bid1.get_quality_score(text1)
         print("1")
         print(score)
-        bid2 = Bid(text2)
-        score = bid2.get_quality_score()
+        score = bid2.get_quality_score(textw)
         print("2")
         print(score)
         

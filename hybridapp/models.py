@@ -13,13 +13,14 @@ class Bid():
     def __init__(self, text):
         self.text = text
 
-    def get_quality_score(self):
-        n_characters = len(self.text)
+    @staticmethod
+    def get_quality_score(text):
+        n_characters = len(text)
         n_errors = 0
-        n_errors += LanguageCheck.get_error_count(self.text)
-        n_errors += ProseLint.get_error_count(self.text)
-        n_errors += PyEnchant.get_error_count(self.text)
-        n_errors += Pedant.get_error_count(self.text)
+        n_errors += LanguageCheck.get_error_count(text)
+        n_errors += ProseLint.get_error_count(text)
+        n_errors += PyEnchant.get_error_count(text)
+        n_errors += Pedant.get_error_count(text)
         return n_characters / (n_errors * 1.0)
     
 # Checks grammar and spelling
