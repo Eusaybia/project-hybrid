@@ -2,6 +2,7 @@
 {% block navbar %}
 {% include "hybridapp/includes/_navbar.html" %}
 {% endblock %}
+{% load humanize %}
 {% block content %}
 <h2>Projects</h2>
 <div class="ui cards">
@@ -11,7 +12,7 @@
             <span class="right floated"><i class="{{ project.currency.country|lower }} flag"></i></span>
             <div class="header">{{ project.title }}</div>
             <div class="meta">
-                <span class="right floated time">{{ project.submitdate|timesince }} ago</span>
+                <span class="right floated time">{{ project.submitdate|naturaltime }}</span>
                 <span class="budget">${{ project.budget.minimum }} - ${{ project.budget.maximum }}</span>
             </div>
             <div class="description">
