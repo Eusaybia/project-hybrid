@@ -104,8 +104,8 @@ def get_bids_by_project_id(project_id):
         bid['submitdate'] = datetime.datetime.fromtimestamp(bid['submitdate'])
         bid_text = Bid(bid["description"])
         bid["quality_score"] = bid_text.get_quality_score()
-        bid["description"] = bid_text.get_suggestions()        
-
+        bid["fixed"] = bid_text.get_suggestions()        
+    
     if len(bids) == 0:
         # List is empty
         bids = None

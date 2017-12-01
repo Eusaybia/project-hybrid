@@ -1,5 +1,4 @@
 from django.db import models
-from hybridapp.services import employer_access_token, freelancer_access_token
 import requests
 import json
 
@@ -7,7 +6,7 @@ import proselint
 from enchant.checker import SpellChecker
 
 # Create your models here.
-class Bid():
+class Bid(object):
     def __init__(self, text):
         self.text = text
 
