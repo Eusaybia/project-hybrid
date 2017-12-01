@@ -22,7 +22,7 @@ def dashboard(request):
 
 # Projects
 def projects(request):
-    user_id = 25832154
+    user_id = 25832201
     projects = get_fl_projects_by_user_id(user_id)
     context = {
         'projects': projects
@@ -31,7 +31,7 @@ def projects(request):
 
 # View to view bids for a specific project
 def projectbids(request, project_id):
-    bids = []
+    bids = get_bids_by_project_id(project_id)
     context = {
         'bids': bids
     }
