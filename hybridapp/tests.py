@@ -24,4 +24,15 @@ class BidTestCase(TestCase):
         else:
             for suggestion in suggestions:
                 print(suggestion)
+                
+class PyEnchantTestCase(TestCase):
+    def setUp(self):
+        pass
+        
+    def test_error_count(self):
+        text = "Thissss hazzz three errorsz"
+        error_count = PyEnchant.get_error_count(text)
+        actual_error_count = 3
+        self.assertEquals(error_count, actual_error_count)
+        
 
