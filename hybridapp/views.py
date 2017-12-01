@@ -18,7 +18,14 @@ def home(request):
 def new(request):
     print(request.method)
     if request.method == 'POST':
-        print(request.POST.get('project-name'))
+        # Get form fields
+        project_name = request.POST.get('project-name')
+        project_skills = request.POST.get('project-skills')
+        project_learn = request.POST.get('project-learn')
+        questions = request.POST.get('questions')
+        min_bid = request.POST.get('min-bid')
+        max_bid = request.POST.get('max-bid')
+
         # Process POST data here once the html template and form
         # is finished.
         # Create new project in our db
