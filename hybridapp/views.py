@@ -34,7 +34,7 @@ def projectbids(request, project_id):
     bids = get_bids_by_project_id(project_id)
     
     # Order the bids
-    sorted(bids, key=lambda bid: bid["quality_score"]) 
+    #sorted(bids, key=lambda bid: bid["quality_score"]) 
     
     context = {
         'bids': bids
