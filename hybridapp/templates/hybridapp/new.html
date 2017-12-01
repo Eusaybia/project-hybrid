@@ -1,9 +1,35 @@
-{% extends 'hybridapp/layout.html' %}
-
-{% block css %}{% endblock %}
-
-{% block content %}
-  <!--Put form here-->
+{% extends 'hybridapp/layout.html' %} {% block css %}{% endblock %} {% block content %}
+<form method="POST" class="ui form">
+    {% csrf_token %}
+    <div class="field">
+        <label>Name of Project</label>
+        <input name="project-name" placeholder="What you want to do" type="text">
+    </div>
+    <div class="field">
+        <label>Areas of Learning</label>
+        <select name="project-skills" multiple="" class="ui search dropdown">
+            <option value="">Skills involved</option>
+            <option value="AF">C</option>
+            <option value="AX">Java</option>
+            <option value="AL">Python</option>
+        </select>
+    </div>
+    <div class="field">
+        <label>What you want to learn and why</label>
+        <textarea name="project-learn" placeholder="I'd like to learn about..."></textarea>
+    </div>
+    <div class="field">
+        <label>Screening questions</label>
+        <input name="last-name" placeholder="Your question here" type="text">
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+</form>
 {% endblock %}
 
-{% block javascript %}{% endblock %}
+{% block javascript %}
+<script>
+    $(function(){
+        $('select.dropdown').dropdown();
+    });
+</script>
+{% endblock %}
