@@ -78,11 +78,12 @@ def get_fl_project(project_id):
         'freelancer-oauth-v1': employer_access_token,
     }
 
-    r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/15339120',
+    r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/' + str(project_id),
                      headers=headers)
 
     project_json = r.json()
     if project_json["status"] != "success":
+        print(project_json)
         return None
     return project_json
 
