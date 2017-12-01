@@ -2,6 +2,8 @@ from django.db import models
 
 import proselint
 from enchant.checker import SpellChecker
+import language_check
+
 import execjs
 import os
 import sys
@@ -12,8 +14,27 @@ class Bid():
         self.text = text
 
     def get_quality_score(self):
-        score = 0
-        return score
+        n_characters = len(self.text)
+        n_errors = 0
+        n_errors += LanguageCheck.get_error_count(self.text)
+        n_errors += ProseLint.get_error_count(self.text)
+        n_errors += PyEnchant.get_error_count(self.text)
+        n_errors += Pedant.get_error_count(self.text)
+        return n_characters / (n_errors * 1.0)
+    
+# Checks grammar and spelling
+class LanguageCheck():
+    @staticmethod
+    def get_error_count(text):
+        tool = language_check.LanguageTool('en-AU')
+        matches = tool.check(text)
+        return len(matches)
+    
+    @staticmethod
+    def fix(text):
+        tool = language_check.LanguageTool('en-AU')
+        matches = tool.check(text)
+        return language_check.correct(text, matches)
     
 # Checks grammar
 class ProseLint():
