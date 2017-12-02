@@ -105,7 +105,10 @@ def get_bids_by_project_id(project_id):
         bid_text = bid["description"]
         bid["quality_score"] = Bid.get_quality_score(bid_text)
         bid["fixed"] = LanguageCheck.fix(bid_text)
-        bid["num_errors"] = Bid.get_total_errors(bid_text)
+        errors = Bid.get_total_errors(bid_text)
+        bid["num_errors"] = errors[0]
+        bid["errors"] = "Errors found:<br>Language Check: " + str(errors[1]) + "<br>ProseLint: " \
+            + str(errors[2]) + "<br>PyEnchant: " + str(errors[3]) + "<br>Pedant: " + str(errors[4])
 
     if len(bids) == 0:
         # List is empty

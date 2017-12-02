@@ -24,11 +24,12 @@ class Bid(object):
     @staticmethod
     def get_total_errors(text):
         n_errors = 0
-        n_errors += LanguageCheck.get_error_count(text)
-        n_errors += ProseLint.get_error_count(text)
-        n_errors += PyEnchant.get_error_count(text)
-        n_errors += Pedant.get_error_count(text)
-        return n_errors
+        a = LanguageCheck.get_error_count(text)
+        b = ProseLint.get_error_count(text)
+        c = PyEnchant.get_error_count(text)
+        d = Pedant.get_error_count(text)
+        n_errors = a+b+c+d
+        return n_errors, a, b, c, d
     
 # Checks grammar and spelling
 class LanguageCheck():
