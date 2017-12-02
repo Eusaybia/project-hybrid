@@ -26,14 +26,19 @@ class BidTestCase(TestCase):
                 We guarantee you to submit the work  within timeline and as per your expectations.\
                 i understand your project very well and i will complete this work within 24 hours . i have completed many similar projects before , so i hope you choose me to work with you.\
                 I will help you untill you get fulfilled from my work."
-        score = bid.get_quality_score(text0)
+        text3 = "Good day in django developer since 3 years. At my portfolio i have several proects i did using Django. Feel free to contact me for any question or comment [9:48] I’m excited to share with you the proposal ,i am an expert in project you mentioned , Imagination and creativity can change the world . we are creative and imaginative We guarantee you to submit the work within timeline and as per your expectations. i understand your project very well and i will complete this work within 24 hours . i have completed many similar projects before , so i hope you choose me to work with you. I will help you untill you get fulfilled from my work. We’ll provide a level of service that is unbeaten and unmatched in quality and efficiency! Wind, rain, or shine, we’re here for you everyday 365 days of the year, 24 hours a day, 7 days a week. Who else can say that, You’re only a couple keyboard clicks away from being connected to a reliable Freelancer, I will fix your problem in the shortest amount of allotted time. We provide an unbeatable freelancing service experience and will work to solve every single one of your problem’s until you(our client), are completely satisfied."
+        
+        score = Bid.get_quality_score(text0)
         print("0")
         print(score)
-        score = bid1.get_quality_score(text1)
+        score = Bid.get_quality_score(text1)
         print("1")
         print(score)
-        score = bid2.get_quality_score(textw)
+        score = Bid.get_quality_score(text2)
         print("2")
+        print(score)
+        score = Bid.get_quality_score(text3)
+        print("3")
         print(score)
         
 class ProseLintTestCase(TestCase):
