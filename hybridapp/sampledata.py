@@ -1,7 +1,6 @@
 import requests
 import json
 
-employer_access_token = "q77Wx5W1sRouMU0sgaHEWbwnVskT7s"
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
 def make_bid(project_id, bidder_id, amount, period, milestone_percentage, description):
@@ -35,10 +34,10 @@ def make_bid(project_id, bidder_id, amount, period, milestone_percentage, descri
     return bid_response
 
 
-def make_project(title, description, jobs):
+def make_project(employer_token, title, description, jobs):
     headers = {
         'content-type': 'application/json',
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
     params = (
         ('compact', ''),
@@ -71,11 +70,11 @@ def make_project(title, description, jobs):
     return project_json["result"]
 
 
-def get_fl_project(project_id):
+def get_fl_project(employer_token, project_id):
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
 
     r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/' + str(project_id),
@@ -87,11 +86,11 @@ def get_fl_project(project_id):
         return None
     return project_json
 
-def get_fl_projects_by_user_id(user_id):
+def get_fl_projects_by_user_id(employer_token, user_id):
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
 
     params = (
@@ -112,11 +111,11 @@ def get_fl_projects_by_user_id(user_id):
 
 
 
-def get_bids_by_project_id(project_id):
+def get_bids_by_project_id(employer_token, project_id):
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
 
     params = (
@@ -140,10 +139,11 @@ def get_bids_by_project_id(project_id):
 employer_id = 25832201
 freelancer_id = 25832153
 user_input = input("New Project(p), new bid (b), or quit(q)? ")
+hardcode_employer_token = "q77Wx5W1sRouMU0sgaHEWbwnVskT7s"
 
 while user_input != "q":
     if user_input == "p":
-        projects = get_fl_projects_by_user_id(employer_id)
+        projects = get_fl_projects_by_user_id(hardcode_employer_token, employer_id)
         if projects:
             print("Current projects")
             for project in projects:
@@ -172,7 +172,7 @@ while user_input != "q":
             print("Project made successfully")
 
     elif user_input == "b":
-        projects = get_fl_projects_by_user_id(employer_id)
+        projects = get_fl_projects_by_user_id(hardcode_employer_token, employer_id)
         if projects:
             print("Current projects")
             for project in projects:

@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^projects/$', views.projects, name='projects'),
     url(r'^projectbids/(?P<project_id>\d+)', views.projectbids, name='projectbids'),
-    url(r'^logout/$', views.logout, name='logout')
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^oauth/redirect/$', views.oauth_redirect, name='oauth_redirect'),
+    url(r'^oauth/$', views.oauth, name='oauth')
 ]

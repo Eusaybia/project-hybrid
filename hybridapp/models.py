@@ -1,5 +1,4 @@
 from django.db import models
-from hybridapp.services import employer_access_token, freelancer_access_token
 import requests
 import json
 
@@ -230,10 +229,10 @@ class DBProjectStore(object):
 
 class ProjectStore(object):
 
-    def post_project(self, project):
+    def post_project(self, employer_token, project):
         headers = {
             'content-type': 'application/json',
-            'freelancer-oauth-v1': employer_access_token,
+            'freelancer-oauth-v1': employer_token,
         }
 
         params = (

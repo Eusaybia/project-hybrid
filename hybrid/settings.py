@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize' 
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +69,8 @@ TEMPLATES = [
         },
     },
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 WSGI_APPLICATION = 'hybrid.wsgi.application'
 

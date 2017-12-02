@@ -2,7 +2,7 @@ import requests
 import json
 import datetime
 from hybridapp.models import Bid
-employer_access_token = "q77Wx5W1sRouMU0sgaHEWbwnVskT7s"
+
 freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
 '''def new_fl_project():
@@ -46,11 +46,11 @@ freelancer_access_token = "VYdGZfXkIRRfb1aTWyzL8ViT9b8idF"
 
     print(r.json())'''
 
-def get_fl_project(project_id):
+def get_fl_project(employer_token, project_id):
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
 
     r = requests.get('https://www.freelancer-sandbox.com/api/projects/0.1/projects/15339120',
@@ -58,11 +58,11 @@ def get_fl_project(project_id):
 
     print(r.json())
 
-def get_fl_projects_by_user_id(user_id):
+def get_fl_projects_by_user_id(employer_token, user_id):
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
 
     params = (
@@ -83,11 +83,11 @@ def get_fl_projects_by_user_id(user_id):
 
     return projects
 
-def get_bids_by_project_id(project_id):
+def get_bids_by_project_id(employer_token, project_id):
     headers = {
         'content-type': 'application/json',
         # Using the API key for the 'testemployer' account
-        'freelancer-oauth-v1': employer_access_token,
+        'freelancer-oauth-v1': employer_token,
     }
 
     params = (
@@ -104,7 +104,7 @@ def get_bids_by_project_id(project_id):
         bid['submitdate'] = datetime.datetime.fromtimestamp(bid['submitdate'])
         bid_text = Bid(bid["description"])
         bid["quality_score"] = bid_text.get_quality_score()
-        bid["description"] = bid_text.get_suggestions()        
+        bid["description"] = bid_text.get_suggestions()
 
     if len(bids) == 0:
         # List is empty
