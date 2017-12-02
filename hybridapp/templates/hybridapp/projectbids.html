@@ -23,10 +23,10 @@
             </div>
         </div>
         <div class="extra content">
-            <span class="errors">
+            <a class="errors" data-tooltip="{{ bid.errors }}" data-variation="wide">
                 <i class="warning sign icon"></i>
-                {{ bid.num_errors }} Error{{  bid.num_errors|pluralize }} in original bid
-            </span>
+                {{ bid.num_errors }} Error{{ bid.num_errors|pluralize }} in original bid
+            </a>
             <span class="right floated num-errors">
                 <i class="line chart icon"></i>
                 Quality: {{ bid.quality_score|floatformat }}%
