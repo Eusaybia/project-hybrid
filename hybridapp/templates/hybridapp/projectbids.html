@@ -25,8 +25,7 @@
         <div class="extra content">
             <a class="errors" data-tooltip="{{ bid.errors }}" data-variation="wide">
                 <i class="warning sign icon"></i>
-                {% if bid.num_errors == 1%}0{% else %}
-                {{ bid.num_errors }}{% endif %} Errors in original bid
+                {{ bid.num_errors }} Error{{ bid.num_errors|pluralize }} in original bid
             </a>
             <span class="right floated num-errors">
                 <i class="line chart icon"></i>
