@@ -109,6 +109,7 @@ def get_bids_by_project_id(project_id):
         bid["num_errors"] = errors[0]
         bid["errors"] = "Errors found:<br>Language Check: " + str(errors[1]) + "<br>ProseLint: " \
             + str(errors[2]) + "<br>PyEnchant: " + str(errors[3]) + "<br>Pedant: " + str(errors[4])
+        print(bid["errors"])
 
     if len(bids) == 0:
         # List is empty

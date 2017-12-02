@@ -18,7 +18,7 @@ class Bid(object):
     @staticmethod
     def get_quality_score(text):
         n_characters = len(text)
-        n_errors = Bid.get_total_errors(text)
+        n_errors = Bid.get_total_errors(text)[0]
         return math.atan(n_characters / ((n_errors ** 1.7) * 1.0)) / math.pi * 200
         
     @staticmethod
