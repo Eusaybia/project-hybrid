@@ -18,7 +18,7 @@ def home(request):
 
 # Dashboard
 def dashboard(request):
-    return render(request, 'hybridapp/dashboard.html')
+    return HttpResponseRedirect(reverse('hybridapp:projects'))
 
 # Projects
 def projects(request):

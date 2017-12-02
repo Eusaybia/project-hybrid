@@ -14,18 +14,19 @@
                 <span class="right floated time">{{ bid.submitdate|naturaltime }}</span>
                 <span class="amount">${{ bid.amount }}</span>
             </div>
-            <div class="description fixed">
+            <div class="description-fixed">
                 <p>{{ bid.fixed }}</p>
             </div>
-            <div class="description orginal" style="display:none;">
+            <div class="ui segment description-orginal">
+                <h3>Original Bid</h3>
                 <p>{{ bid.description }}</p>
             </div>
         </div>
         <div class="extra content">
-            <a class="errors">
+            <span class="errors">
                 <i class="warning sign icon"></i>
                 {{ bid.num_errors }} Error{{  bid.num_errors|pluralize }} in original bid
-            </a>
+            </span>
             <span class="right floated num-errors">
                 <i class="line chart icon"></i>
                 Quality: {{ bid.quality_score|floatformat }}%
@@ -37,13 +38,4 @@
     <p>There are no bids for this project.</p>
     {% endfor %}
 </div>
-{% endblock %}
-{% block javascript %}
-<script>
-    $(function() {
-        $(".errors").click(function() {
-            $(this).parent().parent().find(".description").toggle(400);
-        });
-    });
-</script>
 {% endblock %}
