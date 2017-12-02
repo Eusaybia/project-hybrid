@@ -32,26 +32,6 @@
             </span>
         </div>
         <a class="ui green bottom attached labeled icon button" href="#"><i class="checkmark icon"></i> Accept bid</a>
-    <div class="ui raised card">
-        <div class="content">
-            <div class="header">A bid</div>
-            <div class="meta">
-                Some bid info
-            </div>
-            <div class="description">
-                <p>The bid</p>
-            </div>
-        </div>
-        <div class="extra content">
-            <a href="#">
-                <i class="warning sign icon"></i>
-                22 Errors
-            </a>
-        </div>
-        <div class="ui bottom attached buttons">
-            <a class="ui red labeled icon button" href="#"><i class="hide icon"></i> Hide bid</a>
-            <a class="ui green labeled icon button" href="#"><i class="checkmark icon"></i> Accept bid</a>
-        </div>
     </div>
     {% empty %}
     <p>There are no bids for this project.</p>
@@ -63,7 +43,7 @@
     $(function() {
         $(".errors").click(function() {
             $(this).parent().parent().find(".description").toggle(400);
-        })
+        });
     });
 </script>
 {% endblock %}

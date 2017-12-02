@@ -105,7 +105,7 @@ def get_bids_by_project_id(project_id):
         bid_text = bid["description"]
         bid["quality_score"] = Bid.get_quality_score(bid_text)
         bid["fixed"] = LanguageCheck.fix(bid["description"])
-        bid["n_errors"] = LanguageCheck.get_error_count(bid["description"])
+        bid["num_errors"] = LanguageCheck.get_error_count(bid["description"])
 
     if len(bids) == 0:
         # List is empty
