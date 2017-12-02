@@ -104,8 +104,8 @@ def get_bids_by_project_id(project_id):
         bid['submitdate'] = datetime.datetime.fromtimestamp(bid['submitdate'])
         bid_text = bid["description"]
         bid["quality_score"] = Bid.get_quality_score(bid_text)
-        bid["fixed"] = LanguageCheck.fix(bid["description"])
-        bid["num_errors"] = LanguageCheck.get_error_count(bid["description"])
+        bid["fixed"] = LanguageCheck.fix(bid_text)
+        bid["num_errors"] = Bid.get_total_errors(bid_text)
 
     if len(bids) == 0:
         # List is empty

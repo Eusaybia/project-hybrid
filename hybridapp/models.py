@@ -18,12 +18,17 @@ class Bid(object):
     @staticmethod
     def get_quality_score(text):
         n_characters = len(text)
+        n_errors = Bid.get_total_errors(text)
+        return math.atan(n_characters / ((n_errors ** 1.7) * 1.0)) / math.pi * 200
+        
+    @staticmethod
+    def get_total_errors(text):
         n_errors = 0
         n_errors += LanguageCheck.get_error_count(text)
         n_errors += ProseLint.get_error_count(text)
         n_errors += PyEnchant.get_error_count(text)
         n_errors += Pedant.get_error_count(text)
-        return math.atan(n_characters / (n_errors * 1.1)) / math.pi * 200
+        return n_errors
     
 # Checks grammar and spelling
 class LanguageCheck():
