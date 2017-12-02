@@ -24,11 +24,11 @@
         <div class="extra content">
             <a class="errors">
                 <i class="warning sign icon"></i>
-                {{ bid.num_errors }} Errors in original bid
+                {{ bid.num_errors }} Error{{  bid.num_errors|pluralize }} in original bid
             </a>
             <span class="right floated num-errors">
                 <i class="line chart icon"></i>
-                Quality: {{ bid.quality_score }}
+                Quality: {{ bid.quality_score|floatformat }}%
             </span>
         </div>
         <a class="ui green bottom attached labeled icon button" href="#"><i class="checkmark icon"></i> Accept bid</a>
