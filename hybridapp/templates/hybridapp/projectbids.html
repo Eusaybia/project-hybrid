@@ -23,11 +23,11 @@
             </div>
         </div>
         <div class="extra content">
-            <span class="errors">
+            <a class="errors" data-tooltip="{{ bid.errors }}" data-variation="wide">
                 <i class="warning sign icon"></i>
                 {% if bid.num_errors == 1%}0{% else %}
                 {{ bid.num_errors }}{% endif %} Errors in original bid
-            </span>
+            </a>
             <span class="right floated num-errors">
                 <i class="line chart icon"></i>
                 Quality: {{ bid.quality_score|floatformat }}%
