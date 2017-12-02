@@ -8,6 +8,7 @@ import language_check
 import execjs
 import os
 import sys
+import math
 
 # Create your models here.
 class Bid(object):
@@ -22,7 +23,7 @@ class Bid(object):
         n_errors += ProseLint.get_error_count(text)
         n_errors += PyEnchant.get_error_count(text)
         n_errors += Pedant.get_error_count(text)
-        return n_characters / (n_errors * 1.0)
+        return math.atan(n_characters / (n_errors * 1.1)) / math.pi * 200
     
 # Checks grammar and spelling
 class LanguageCheck():
