@@ -25,7 +25,8 @@
         <div class="extra content">
             <span class="errors">
                 <i class="warning sign icon"></i>
-                {{ bid.num_errors }} Error{{  bid.num_errors|pluralize }} in original bid
+                {% if bid.num_errors == 1%}0{% else %}
+                {{ bid.num_errors }}{% endif %} Errors in original bid
             </span>
             <span class="right floated num-errors">
                 <i class="line chart icon"></i>
